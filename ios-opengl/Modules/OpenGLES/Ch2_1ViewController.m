@@ -10,7 +10,7 @@
 
 /**
  4. 顶点结构体
- SceneVertex是一个C结构体，用来保存一个GLKVector3类型的成员positionCoords。
+ SceneVertex是一个C结构体，用来保存一个GLKVector3类型的成员positionCoords（位置坐标）。
  GLKit的GLKVector3类型保存了3个坐标：X、Y和Z。
  */
 typedef struct{

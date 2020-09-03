@@ -395,7 +395,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2WUZ4595W7;
+				DEVELOPMENT_TEAM = Y5JAPXR9CH;
 				GCC_PREFIX_HEADER = "ios-opengl/Define/PrefixHeader.pch";
 				INFOPLIST_FILE = "ios-opengl/SupportFiles/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -415,7 +415,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2WUZ4595W7;
+				DEVELOPMENT_TEAM = Y5JAPXR9CH;
 				GCC_PREFIX_HEADER = "ios-opengl/Define/PrefixHeader.pch";
 				INFOPLIST_FILE = "ios-opengl/SupportFiles/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
