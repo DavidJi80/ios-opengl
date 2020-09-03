@@ -8,9 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		04C7F8B92500986A00F524E3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C7F8B82500986A00F524E3 /* AppDelegate.m */; };
-		04C7F8BC2500986A00F524E3 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C7F8BB2500986A00F524E3 /* SceneDelegate.m */; };
 		04C7F8BF2500986A00F524E3 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C7F8BE2500986A00F524E3 /* ViewController.m */; };
-		04C7F8C22500986A00F524E3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04C7F8C02500986A00F524E3 /* Main.storyboard */; };
 		04C7F8C42500986D00F524E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04C7F8C32500986D00F524E3 /* Assets.xcassets */; };
 		04C7F8C72500986D00F524E3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04C7F8C52500986D00F524E3 /* LaunchScreen.storyboard */; };
 		04C7F8CA2500986D00F524E3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C7F8C92500986D00F524E3 /* main.m */; };
@@ -20,11 +18,8 @@
 		04C7F8B42500986A00F524E3 /* ios-opengl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ios-opengl.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		04C7F8B72500986A00F524E3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		04C7F8B82500986A00F524E3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		04C7F8BA2500986A00F524E3 /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
-		04C7F8BB2500986A00F524E3 /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
 		04C7F8BD2500986A00F524E3 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		04C7F8BE2500986A00F524E3 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		04C7F8C12500986A00F524E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		04C7F8C32500986D00F524E3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		04C7F8C62500986D00F524E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		04C7F8C82500986D00F524E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -63,11 +58,8 @@
 			children = (
 				04C7F8B72500986A00F524E3 /* AppDelegate.h */,
 				04C7F8B82500986A00F524E3 /* AppDelegate.m */,
-				04C7F8BA2500986A00F524E3 /* SceneDelegate.h */,
-				04C7F8BB2500986A00F524E3 /* SceneDelegate.m */,
 				04C7F8BD2500986A00F524E3 /* ViewController.h */,
 				04C7F8BE2500986A00F524E3 /* ViewController.m */,
-				04C7F8C02500986A00F524E3 /* Main.storyboard */,
 				04C7F8C32500986D00F524E3 /* Assets.xcassets */,
 				04C7F8C52500986D00F524E3 /* LaunchScreen.storyboard */,
 				04C7F8C82500986D00F524E3 /* Info.plist */,
@@ -135,7 +127,6 @@
 			files = (
 				04C7F8C72500986D00F524E3 /* LaunchScreen.storyboard in Resources */,
 				04C7F8C42500986D00F524E3 /* Assets.xcassets in Resources */,
-				04C7F8C22500986A00F524E3 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -149,21 +140,12 @@
 				04C7F8BF2500986A00F524E3 /* ViewController.m in Sources */,
 				04C7F8B92500986A00F524E3 /* AppDelegate.m in Sources */,
 				04C7F8CA2500986D00F524E3 /* main.m in Sources */,
-				04C7F8BC2500986A00F524E3 /* SceneDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		04C7F8C02500986A00F524E3 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				04C7F8C12500986A00F524E3 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		04C7F8C52500986D00F524E3 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -292,13 +274,14 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2WUZ4595W7;
 				INFOPLIST_FILE = "ios-opengl/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "net.tongark.ios-opengl";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -309,13 +292,14 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2WUZ4595W7;
 				INFOPLIST_FILE = "ios-opengl/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "net.tongark.ios-opengl";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
