@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -12,6 +12,8 @@
 		04C7F8C42500986D00F524E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04C7F8C32500986D00F524E3 /* Assets.xcassets */; };
 		04C7F8C72500986D00F524E3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04C7F8C52500986D00F524E3 /* LaunchScreen.storyboard */; };
 		04C7F8CA2500986D00F524E3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C7F8C92500986D00F524E3 /* main.m */; };
+		04C7F8D72500B29400F524E3 /* Ch2_1ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C7F8D62500B29400F524E3 /* Ch2_1ViewController.m */; };
+		04C7F8DB2500E7A700F524E3 /* DrawTriangleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C7F8DA2500E7A700F524E3 /* DrawTriangleViewController.m */; };
 		7BFC2B286BA17D70A45DFCC0 /* Pods_ios_opengl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54DD8CBD5930BD7004E9014C /* Pods_ios_opengl.framework */; };
 /* End PBXBuildFile section */
 
@@ -25,6 +27,11 @@
 		04C7F8C62500986D00F524E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		04C7F8C82500986D00F524E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		04C7F8C92500986D00F524E3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		04C7F8D325009D8C00F524E3 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		04C7F8D52500B29400F524E3 /* Ch2_1ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Ch2_1ViewController.h; sourceTree = "<group>"; };
+		04C7F8D62500B29400F524E3 /* Ch2_1ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Ch2_1ViewController.m; sourceTree = "<group>"; };
+		04C7F8D92500E7A700F524E3 /* DrawTriangleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DrawTriangleViewController.h; sourceTree = "<group>"; };
+		04C7F8DA2500E7A700F524E3 /* DrawTriangleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DrawTriangleViewController.m; sourceTree = "<group>"; };
 		49DD12AA87BFCC8DC5357472 /* Pods-ios-opengl.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios-opengl.debug.xcconfig"; path = "Target Support Files/Pods-ios-opengl/Pods-ios-opengl.debug.xcconfig"; sourceTree = "<group>"; };
 		54DD8CBD5930BD7004E9014C /* Pods_ios_opengl.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ios_opengl.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		610500AE32BDCD3F58DFCFFC /* Pods-ios-opengl.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios-opengl.release.xcconfig"; path = "Target Support Files/Pods-ios-opengl/Pods-ios-opengl.release.xcconfig"; sourceTree = "<group>"; };
@@ -63,16 +70,61 @@
 		04C7F8B62500986A00F524E3 /* ios-opengl */ = {
 			isa = PBXGroup;
 			children = (
-				04C7F8B72500986A00F524E3 /* AppDelegate.h */,
-				04C7F8B82500986A00F524E3 /* AppDelegate.m */,
-				04C7F8BD2500986A00F524E3 /* ViewController.h */,
-				04C7F8BE2500986A00F524E3 /* ViewController.m */,
-				04C7F8C32500986D00F524E3 /* Assets.xcassets */,
+				04C7F8D225009D7A00F524E3 /* Define */,
+				04C7F8D025009C9800F524E3 /* SupportFiles */,
+				04C7F8D125009D2A00F524E3 /* Modules */,
+			);
+			path = "ios-opengl";
+			sourceTree = "<group>";
+		};
+		04C7F8D025009C9800F524E3 /* SupportFiles */ = {
+			isa = PBXGroup;
+			children = (
 				04C7F8C52500986D00F524E3 /* LaunchScreen.storyboard */,
 				04C7F8C82500986D00F524E3 /* Info.plist */,
 				04C7F8C92500986D00F524E3 /* main.m */,
+				04C7F8C32500986D00F524E3 /* Assets.xcassets */,
+				04C7F8B72500986A00F524E3 /* AppDelegate.h */,
+				04C7F8B82500986A00F524E3 /* AppDelegate.m */,
 			);
-			path = "ios-opengl";
+			path = SupportFiles;
+			sourceTree = "<group>";
+		};
+		04C7F8D125009D2A00F524E3 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				04C7F8D82500E74F00F524E3 /* Demo */,
+				04C7F8D42500B23400F524E3 /* OpenGLES */,
+				04C7F8BD2500986A00F524E3 /* ViewController.h */,
+				04C7F8BE2500986A00F524E3 /* ViewController.m */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		04C7F8D225009D7A00F524E3 /* Define */ = {
+			isa = PBXGroup;
+			children = (
+				04C7F8D325009D8C00F524E3 /* PrefixHeader.pch */,
+			);
+			path = Define;
+			sourceTree = "<group>";
+		};
+		04C7F8D42500B23400F524E3 /* OpenGLES */ = {
+			isa = PBXGroup;
+			children = (
+				04C7F8D52500B29400F524E3 /* Ch2_1ViewController.h */,
+				04C7F8D62500B29400F524E3 /* Ch2_1ViewController.m */,
+			);
+			path = OpenGLES;
+			sourceTree = "<group>";
+		};
+		04C7F8D82500E74F00F524E3 /* Demo */ = {
+			isa = PBXGroup;
+			children = (
+				04C7F8D92500E7A700F524E3 /* DrawTriangleViewController.h */,
+				04C7F8DA2500E7A700F524E3 /* DrawTriangleViewController.m */,
+			);
+			path = Demo;
 			sourceTree = "<group>";
 		};
 		1C9985AF269B1F486F5E968B /* Pods */ = {
@@ -81,7 +133,6 @@
 				49DD12AA87BFCC8DC5357472 /* Pods-ios-opengl.debug.xcconfig */,
 				610500AE32BDCD3F58DFCFFC /* Pods-ios-opengl.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -206,8 +257,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04C7F8D72500B29400F524E3 /* Ch2_1ViewController.m in Sources */,
 				04C7F8BF2500986A00F524E3 /* ViewController.m in Sources */,
 				04C7F8B92500986A00F524E3 /* AppDelegate.m in Sources */,
+				04C7F8DB2500E7A700F524E3 /* DrawTriangleViewController.m in Sources */,
 				04C7F8CA2500986D00F524E3 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -343,7 +396,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2WUZ4595W7;
-				INFOPLIST_FILE = "ios-opengl/Info.plist";
+				GCC_PREFIX_HEADER = "ios-opengl/Define/PrefixHeader.pch";
+				INFOPLIST_FILE = "ios-opengl/SupportFiles/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -362,7 +416,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2WUZ4595W7;
-				INFOPLIST_FILE = "ios-opengl/Info.plist";
+				GCC_PREFIX_HEADER = "ios-opengl/Define/PrefixHeader.pch";
+				INFOPLIST_FILE = "ios-opengl/SupportFiles/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
