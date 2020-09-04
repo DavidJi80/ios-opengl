@@ -119,7 +119,7 @@ static const SceneVertex vertices[] = {
  */
 - (void)glkView:(GLKView *)view drawInRect:(CGRect)rect{
     [self.baseEffect prepareToDraw];
-    glClearColor(1.f,0.0f,0.0f,1.0f);                  //设置背景色
+    glClearColor(1.f,0.0f,0.0f,1.0f);                   //设置背景色
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); //Clear Frame Buffer
     /**
      void glEnableVertexAttribArray(GLuint index);
