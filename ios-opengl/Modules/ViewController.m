@@ -12,6 +12,7 @@
 #import "Ch4_1ViewController.h"
 #import "DrawTriangleViewController.h"
 #import "LightGLKVC.h"
+#import "GLSL0ViewController.h"
 #import "GLSL1ViewController.h"
 
 @interface ViewController ()
@@ -21,6 +22,7 @@
 @property (strong, nonatomic) UIButton *ch4_1Btn;
 @property (strong, nonatomic) UIButton *demo1Btn;
 @property (strong, nonatomic) UIButton *demo2Btn;
+@property (strong, nonatomic) UIButton *demoGlsl0Btn;
 @property (strong, nonatomic) UIButton *demoGlsl1Btn;
 
 @end
@@ -67,10 +69,16 @@
         make.top.height.width.equalTo(self.demo1Btn);
     }];
     
-    [self.view addSubview:self.demoGlsl1Btn];
-    [self.demoGlsl1Btn makeConstraints:^(MASConstraintMaker *make) {
+    [self.view addSubview:self.demoGlsl0Btn];
+    [self.demoGlsl0Btn makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.demo2Btn.right).offset(10);
         make.top.height.width.equalTo(self.demo1Btn);
+    }];
+    
+    [self.view addSubview:self.demoGlsl1Btn];
+    [self.demoGlsl1Btn makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.demoGlsl0Btn.bottom).offset(10);
+        make.left.height.width.equalTo(self.demo1Btn);
     }];
 }
 
@@ -139,6 +147,19 @@
     return _demo2Btn;
 }
 
+- (UIButton *)demoGlsl0Btn{
+    if (!_demoGlsl0Btn) {
+        UIButton *button = [[UIButton alloc]init];
+        [button setBackgroundImage:nil forState:UIControlStateNormal];
+        [button setTitle:@"GLSL0" forState:UIControlStateNormal];
+        [button addTarget:self action:@selector(demoGLSL0) forControlEvents:UIControlEventTouchUpInside];
+        [button setImage:[UIImage imageNamed:@"TzClose"] forState:UIControlStateNormal];
+        button.backgroundColor=UIColor.brownColor;
+        _demoGlsl0Btn = button;
+    }
+    return _demoGlsl0Btn;
+}
+
 - (UIButton *)demoGlsl1Btn{
     if (!_demoGlsl1Btn) {
         UIButton *button = [[UIButton alloc]init];
@@ -174,6 +195,11 @@
 
 -(void)demo2{
     LightGLKVC *vc=[LightGLKVC new];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+-(void)demoGLSL0{
+    GLSL0ViewController *vc=[GLSL0ViewController new];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

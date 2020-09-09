@@ -10,6 +10,9 @@
 		0473DFD72507239300070609 /* GLSL1ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0473DFD62507239300070609 /* GLSL1ViewController.m */; };
 		0473DFD925072A7B00070609 /* VertexShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 0473DFD825072A7B00070609 /* VertexShader.glsl */; };
 		0473DFDB2507359600070609 /* fragmentShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 0473DFDA2507359600070609 /* fragmentShader.glsl */; };
+		0473DFDF250889F800070609 /* GLSL0ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0473DFDE250889F800070609 /* GLSL0ViewController.m */; };
+		0473DFE12508B53300070609 /* SimpleVertex.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 0473DFE02508B53300070609 /* SimpleVertex.glsl */; };
+		0473DFE32508B55400070609 /* SimpleFragment.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 0473DFE22508B55400070609 /* SimpleFragment.glsl */; };
 		04C7F8B92500986A00F524E3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C7F8B82500986A00F524E3 /* AppDelegate.m */; };
 		04C7F8BF2500986A00F524E3 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C7F8BE2500986A00F524E3 /* ViewController.m */; };
 		04C7F8C42500986D00F524E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04C7F8C32500986D00F524E3 /* Assets.xcassets */; };
@@ -29,6 +32,10 @@
 		0473DFD62507239300070609 /* GLSL1ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GLSL1ViewController.m; sourceTree = "<group>"; };
 		0473DFD825072A7B00070609 /* VertexShader.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = VertexShader.glsl; sourceTree = "<group>"; };
 		0473DFDA2507359600070609 /* fragmentShader.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = fragmentShader.glsl; sourceTree = "<group>"; };
+		0473DFDD250889F800070609 /* GLSL0ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GLSL0ViewController.h; sourceTree = "<group>"; };
+		0473DFDE250889F800070609 /* GLSL0ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GLSL0ViewController.m; sourceTree = "<group>"; };
+		0473DFE02508B53300070609 /* SimpleVertex.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = SimpleVertex.glsl; sourceTree = "<group>"; };
+		0473DFE22508B55400070609 /* SimpleFragment.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = SimpleFragment.glsl; sourceTree = "<group>"; };
 		04C7F8B42500986A00F524E3 /* ios-opengl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ios-opengl.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		04C7F8B72500986A00F524E3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		04C7F8B82500986A00F524E3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -76,6 +83,17 @@
 				0473DFDA2507359600070609 /* fragmentShader.glsl */,
 			);
 			path = GLSL;
+			sourceTree = "<group>";
+		};
+		0473DFDC250889AA00070609 /* GLSL_0 */ = {
+			isa = PBXGroup;
+			children = (
+				0473DFDD250889F800070609 /* GLSL0ViewController.h */,
+				0473DFDE250889F800070609 /* GLSL0ViewController.m */,
+				0473DFE02508B53300070609 /* SimpleVertex.glsl */,
+				0473DFE22508B55400070609 /* SimpleFragment.glsl */,
+			);
+			path = GLSL_0;
 			sourceTree = "<group>";
 		};
 		04C7F8AB2500986A00F524E3 = {
@@ -155,6 +173,7 @@
 		04C7F8D82500E74F00F524E3 /* Demo */ = {
 			isa = PBXGroup;
 			children = (
+				0473DFDC250889AA00070609 /* GLSL_0 */,
 				0473DFD42507236600070609 /* GLSL */,
 				04C7F8E325022AF600F524E3 /* LightGLKVC.h */,
 				04C7F8E225022AF600F524E3 /* LightGLKVC.m */,
@@ -250,9 +269,11 @@
 			files = (
 				0473DFDB2507359600070609 /* fragmentShader.glsl in Resources */,
 				04C7F8C72500986D00F524E3 /* LaunchScreen.storyboard in Resources */,
+				0473DFE32508B55400070609 /* SimpleFragment.glsl in Resources */,
 				04C7F8C42500986D00F524E3 /* Assets.xcassets in Resources */,
 				0473DFD925072A7B00070609 /* VertexShader.glsl in Resources */,
 				04C7F8E12502140200F524E3 /* Demo.jpg in Resources */,
+				0473DFE12508B53300070609 /* SimpleVertex.glsl in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -314,6 +335,7 @@
 				0473DFD72507239300070609 /* GLSL1ViewController.m in Sources */,
 				04C7F8E725035FFC00F524E3 /* Ch4_1ViewController.m in Sources */,
 				04C7F8CA2500986D00F524E3 /* main.m in Sources */,
+				0473DFDF250889F800070609 /* GLSL0ViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
