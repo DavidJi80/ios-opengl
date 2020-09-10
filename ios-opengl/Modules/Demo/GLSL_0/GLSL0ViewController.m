@@ -20,7 +20,6 @@
 }
 
 @property (nonatomic , strong) EAGLContext* mContext;
-@property (nonatomic , strong) GLKBaseEffect* mEffect;
 
 @end
 
@@ -104,27 +103,25 @@
     glGenRenderbuffers(1, &_colorRenderBuffer);
     // 设置为当前renderBuffer
     glBindRenderbuffer(GL_RENDERBUFFER, _colorRenderBuffer);
-    //为color renderbuffer 分配存储空间
+    // 为color renderbuffer 分配存储空间
     [_eaglContext renderbufferStorage:GL_RENDERBUFFER fromDrawable:_eaglLayer];
     
     // FBO用于管理colorRenderBuffer，离屏渲染
     glGenFramebuffers(1, &_frameBuffer);
-    //设置为当前framebuffer
+    // 设置为当前framebuffer
     glBindFramebuffer(GL_FRAMEBUFFER, _frameBuffer);
     // 将 _colorRenderBuffer 装配到 GL_COLOR_ATTACHMENT0 这个装配点上
     glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, _colorRenderBuffer);
 }
 
 - (void)compileShaders {
-    
-      // 生成一个顶点着色器对象
+    // 生成一个顶点着色器对象
     GLuint vertexShader = [self compileShader:@"SimpleVertex" withType:GL_VERTEX_SHADER];
-    
-      // 生成一个片段着色器对象
+    // 生成一个片段着色器对象
     GLuint fragmentShader = [self compileShader:@"SimpleFragment" withType:GL_FRAGMENT_SHADER];
     
-    
     /*
+     1. 程序对象
      调用了glCreateProgram glAttachShader  glLinkProgram 连接 vertex 和 fragment shader成一个完整的program。
      着色器程序对象(Shader Program Object)是多个着色器合并之后并最终链接完成的版本。
      如果要使用刚才编译的着色器我们必须把它们链接(Link)为一个着色器程序对象，
@@ -135,14 +132,13 @@
     glAttachShader(programHandle, fragmentShader); // 链接片段着色器
     glLinkProgram(programHandle); // 链接程序
     
-        // 把着色器对象链接到程序对象以后，记得删除着色器对象，我们不再需要它们了
+    //2. 把着色器对象链接到程序对象以后，记得删除着色器对象，我们不再需要它们了
     glDeleteShader(vertexShader);
     glDeleteShader(fragmentShader);
     
-        // 调用 glGetProgramiv来检查是否有error，并输出信息。
+    //3. 调用 glGetProgramiv来检查是否有error，并输出信息。
     GLint linkSuccess;
     glGetProgramiv(programHandle, GL_LINK_STATUS, &linkSuccess);
-    
     if (linkSuccess == GL_FALSE) {
         GLchar messages[256];
         NSString *messageString = [NSString stringWithUTF8String:messages];
@@ -150,44 +146,38 @@
         exit(1);
     }
     
-       // 调用 glUseProgram绑定程序对象 让OpenGL ES真正执行你的program进行渲染
+    //4. 调用 glUseProgram绑定程序对象 让OpenGL ES真正执行你的program进行渲染
     glUseProgram(programHandle);
     
-       // 把“顶点属性索引”绑定到“顶点属性名”
+    //5. 把“顶点属性索引”绑定到“顶点属性名”
     glGetAttribLocation(programHandle, "Position");
-
 }
 
 
 - (GLuint)compileShader:(NSString *)shaderName withType:(GLenum)shaderType {
-    
-    // NSBundle中加载文件
+    //1. NSBundle中加载文件
     NSString *shaderPath = [[NSBundle mainBundle] pathForResource:shaderName ofType:@"glsl"];
-    
     NSError* error;
     NSString* shaderString = [NSString stringWithContentsOfFile:shaderPath encoding:NSUTF8StringEncoding error:&error];
-    
     // 如果为空就打印错误并退出
     if (!shaderString) {
         NSLog(@"Error loading shader: %@", error.localizedDescription);
         exit(1);
     }
     
-    // 使用glCreateShader函数可以创建指定类型的着色器对象。shaderType是指定创建的着色器类型
+    //2. 使用glCreateShader函数可以创建指定类型的着色器对象。shaderType是指定创建的着色器类型
     GLuint shader = glCreateShader(shaderType);
     
+    //3. 使用glShaderSource将着色器源码加载到上面生成的着色器对象上
     // 这里把NSString转换成C-string
     const char* shaderStringUTF8 = [shaderString UTF8String];
-    
     int shaderStringLength = (int)shaderString.length;
-    
-    // 使用glShaderSource将着色器源码加载到上面生成的着色器对象上
     glShaderSource(shader, 1, &shaderStringUTF8, &shaderStringLength);
     
-    // 调用glCompileShader 在运行时编译shader
+    //4. 调用glCompileShader 在运行时编译shader
     glCompileShader(shader);
     
-    // glGetShaderiv检查编译错误（然后退出）
+    //5. glGetShaderiv检查编译错误（然后退出）
     GLint compileSuccess;
     glGetShaderiv(shader, GL_COMPILE_STATUS, &compileSuccess);
     if (compileSuccess == GL_FALSE) {
@@ -196,8 +186,7 @@
         NSLog(@"生成着色器对象:%@", messageString);
         exit(1);
     }
-    
-    // 返回一个着色器对象
+    //6. 返回一个着色器对象
     return shader;
 }
 
@@ -207,6 +196,9 @@
 }
 
 - (void)renderUsingIndexVBO {
+    int numAttributs;
+    glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &numAttributs);
+    NSLog(@"----numAttributs:%d",numAttributs);
     
     const GLfloat vertices[] = {
         0.5f, 0.5f, 0.0f,   // 右上角
@@ -214,6 +206,19 @@
         -0.5f, -0.5f, 0.0f, // 左下角
         -0.5f, 0.5f, 0.0f   // 左上角
     };
+    
+    /* //绘制矩形
+    const GLfloat vertices[] = {
+        // 第一个三角形
+        0.5f, 0.5f, 0.0f,
+        0.5f, -0.5f, 0.0f,
+        -0.5f, 0.5f, 0.0f,
+        // 第二个三角形
+        0.5f, -0.5f, 0.0f,
+        -0.5f, -0.5f, 0.0f,
+        -0.5f, 0.5f, 0.0f
+    };
+     */
     
     const GLubyte indices[] = {
         0,1,3,   // 绘制第一个三角形
@@ -242,7 +247,7 @@
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
     glEnableVertexAttribArray(0);
     
-//    glDrawArrays(GL_TRIANGLES, 0, 4);
+//    glDrawArrays(GL_TRIANGLES, 0, 3);
 
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, 0);
 }
