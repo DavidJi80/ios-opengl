@@ -14,6 +14,9 @@
 #import "LightGLKVC.h"
 #import "GLSL0ViewController.h"
 #import "GLSL1ViewController.h"
+#import "GLSL2ViewController.h"
+#import "GLSL3ViewController.h"
+#import "Glsl4ViewController.h"
 
 @interface ViewController ()
 
@@ -24,6 +27,9 @@
 @property (strong, nonatomic) UIButton *demo2Btn;
 @property (strong, nonatomic) UIButton *demoGlsl0Btn;
 @property (strong, nonatomic) UIButton *demoGlsl1Btn;
+@property (strong, nonatomic) UIButton *demoGlsl2Btn;
+@property (strong, nonatomic) UIButton *demoGlsl3Btn;
+@property (strong, nonatomic) UIButton *demoGlsl4Btn;
 
 @end
 
@@ -79,6 +85,24 @@
     [self.demoGlsl1Btn makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.demoGlsl0Btn.bottom).offset(10);
         make.left.height.width.equalTo(self.demo1Btn);
+    }];
+    
+    [self.view addSubview:self.demoGlsl2Btn];
+    [self.demoGlsl2Btn makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.demoGlsl1Btn.right).offset(10);
+        make.top.height.width.equalTo(self.demoGlsl1Btn);
+    }];
+    
+    [self.view addSubview:self.demoGlsl3Btn];
+    [self.demoGlsl3Btn makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.demoGlsl2Btn.right).offset(10);
+        make.top.height.width.equalTo(self.demoGlsl1Btn);
+    }];
+    
+    [self.view addSubview:self.demoGlsl4Btn];
+    [self.demoGlsl4Btn makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.demoGlsl1Btn.bottom).offset(10);
+        make.left.height.width.equalTo(self.demoGlsl1Btn);
     }];
 }
 
@@ -173,6 +197,45 @@
     return _demoGlsl1Btn;
 }
 
+- (UIButton *)demoGlsl2Btn{
+    if (!_demoGlsl2Btn) {
+        UIButton *button = [[UIButton alloc]init];
+        [button setBackgroundImage:nil forState:UIControlStateNormal];
+        [button setTitle:@"GLSL2" forState:UIControlStateNormal];
+        [button addTarget:self action:@selector(demoGLSL2) forControlEvents:UIControlEventTouchUpInside];
+        [button setImage:[UIImage imageNamed:@"TzClose"] forState:UIControlStateNormal];
+        button.backgroundColor=UIColor.brownColor;
+        _demoGlsl2Btn = button;
+    }
+    return _demoGlsl2Btn;
+}
+
+- (UIButton *)demoGlsl3Btn{
+    if (!_demoGlsl3Btn) {
+        UIButton *button = [[UIButton alloc]init];
+        [button setBackgroundImage:nil forState:UIControlStateNormal];
+        [button setTitle:@"GLSL3" forState:UIControlStateNormal];
+        [button addTarget:self action:@selector(demoGLSL3) forControlEvents:UIControlEventTouchUpInside];
+        [button setImage:[UIImage imageNamed:@"TzClose"] forState:UIControlStateNormal];
+        button.backgroundColor=UIColor.brownColor;
+        _demoGlsl3Btn = button;
+    }
+    return _demoGlsl3Btn;
+}
+
+- (UIButton *)demoGlsl4Btn{
+    if (!_demoGlsl4Btn) {
+        UIButton *button = [[UIButton alloc]init];
+        [button setBackgroundImage:nil forState:UIControlStateNormal];
+        [button setTitle:@"GLSL4" forState:UIControlStateNormal];
+        [button addTarget:self action:@selector(demoGLSL4) forControlEvents:UIControlEventTouchUpInside];
+        [button setImage:[UIImage imageNamed:@"TzClose"] forState:UIControlStateNormal];
+        button.backgroundColor=UIColor.brownColor;
+        _demoGlsl4Btn = button;
+    }
+    return _demoGlsl4Btn;
+}
+
 -(void)ch2_1{
     Ch2_1ViewController *vc=[Ch2_1ViewController new];
     [self.navigationController pushViewController:vc animated:YES];
@@ -208,6 +271,19 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+-(void)demoGLSL2{
+    GLSL2ViewController *vc=[GLSL2ViewController new];
+    [self.navigationController pushViewController:vc animated:YES];
+}
 
+-(void)demoGLSL3{
+    GLSL3ViewController *vc=[GLSL3ViewController new];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+-(void)demoGLSL4{
+    Glsl4ViewController *vc=[Glsl4ViewController new];
+    [self.navigationController pushViewController:vc animated:YES];
+}
 
 @end
