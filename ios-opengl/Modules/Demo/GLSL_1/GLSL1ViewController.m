@@ -27,19 +27,16 @@
     [self compileShaders];
 }
 
+// 配置OpenGL和GLKit
 - (void)setupGLContext {
     self.glContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES3];
-    self.preferredFramesPerSecond = 60;
-    if (!self.glContext) {
-        NSLog(@"Failed to create ES context");
-    }
+    [EAGLContext setCurrentContext:self.glContext];
     
+    self.preferredFramesPerSecond = 60;
     GLKView *view = (GLKView *)self.view;
     view.context = self.glContext;
     view.drawableDepthFormat = GLKViewDrawableDepthFormat24;
     view.drawableMultisample = GLKViewDrawableMultisample4X;
-    
-    [EAGLContext setCurrentContext:self.glContext];
 }
 
 - (void)compileShaders {

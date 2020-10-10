@@ -188,7 +188,7 @@
     if (!_demoGlsl1Btn) {
         UIButton *button = [[UIButton alloc]init];
         [button setBackgroundImage:nil forState:UIControlStateNormal];
-        [button setTitle:@"GLSL" forState:UIControlStateNormal];
+        [button setTitle:@"GLSL1" forState:UIControlStateNormal];
         [button addTarget:self action:@selector(demoGLSL) forControlEvents:UIControlEventTouchUpInside];
         [button setImage:[UIImage imageNamed:@"TzClose"] forState:UIControlStateNormal];
         button.backgroundColor=UIColor.brownColor;

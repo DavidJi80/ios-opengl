@@ -9,23 +9,31 @@
 #import "Glsl4ViewController.h"
 #import <GLKit/GLKit.h>
 
-/**
- 定义顶点类型
- */
+#pragma mark - VAO
+// 定义顶点类型
 typedef struct {
     GLKVector3 positionCoord; // (X, Y, Z)
-    GLKVector2 textureCoord; // (U, V)
+    GLKVector2 textureCoord;  // (U, V)
 } SenceVertex;
+
+// 顶点数据
+const SenceVertex vertices[] = {
+    { {-1.0,  1.0, 0.0}, {0.0, 1.0} },   // 右上角
+    { {-1.0, -1.0, 0.0}, {0.0, 0.0} },   // 右下角
+    { { 1.0,  1.0, 0.0}, {1.0, 1.0} },   // 左下角
+    { { 1.0, -1.0, 0.0}, {1.0, 0.0} }    // 左上角
+};
 
 
 @interface Glsl4ViewController ()
 
-@property (nonatomic, assign) SenceVertex *vertices; // 顶点数组
 @property (nonatomic, strong) EAGLContext *context;
 
 @end
 
 @implementation Glsl4ViewController
+
+#pragma mark - Life cycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -33,71 +41,80 @@ typedef struct {
     [self commonInit];
 }
 
+- (void)dealloc {
+    if ([EAGLContext currentContext] == self.context) {
+        [EAGLContext setCurrentContext:nil];
+    }
+}
+
+#pragma mark - OpenGL ES
+
 - (void)commonInit {
-    // 创建上下文，使用 2.0 版本
+    // ------ 初始化、着色器、纹理 ------ //
+    // 1. 创建OpenGL ES上下文，使用 2.0 版本
     self.context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
     [EAGLContext setCurrentContext:self.context];
-    
-    // 创建顶点数组
-    self.vertices = malloc(sizeof(SenceVertex) * 4); // 4 个顶点
-    self.vertices[0] = (SenceVertex){{-1, 1, 0}, {0, 1}}; // 左上角
-    self.vertices[1] = (SenceVertex){{-1, -1, 0}, {0, 0}}; // 左下角
-    self.vertices[2] = (SenceVertex){{1, 1, 0}, {1, 1}}; // 右上角
-    self.vertices[3] = (SenceVertex){{1, -1, 0}, {1, 0}}; // 右下角
-    
-    // 创建一个展示纹理的层
+        
+    // 2.1. 创建一个展示纹理的层 CAEAGLLayer
     CAEAGLLayer *layer = [[CAEAGLLayer alloc] init];
     layer.frame = CGRectMake(0, 100, self.view.frame.size.width, self.view.frame.size.width);
     layer.contentsScale = [[UIScreen mainScreen] scale];  // 设置缩放比例，不设置的话，纹理会失真
     [self.view.layer addSublayer:layer];
     
-    // 绑定纹理输出的层
+    // 2.2. 绑定纹理输出的层
     [self bindRenderLayer:layer];
     
-    // 读取纹理
+    // 3. 读取纹理
     NSString *imagePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Demo.jpg"];
     UIImage *image = [UIImage imageWithContentsOfFile:imagePath];
     GLuint textureID = [self createTextureWithImage:image];
     
-    // 设置视口尺寸
+    // 4. 设置视口尺寸
     glViewport(0, 0, self.drawableWidth, self.drawableHeight);
     
-    // 编译链接 shader
+    // 5. 编译‘着色器’并链接到‘着色器程序’
     GLuint program = [self programWithShaderName:@"glsl"]; // glsl.vsh & glsl.fsh
     glUseProgram(program);
     
-    // 获取 shader 中的参数，然后传数据进去
-    GLuint positionSlot = glGetAttribLocation(program, "Position");
-    GLuint textureSlot = glGetUniformLocation(program, "Texture");  // 注意 Uniform 类型的获取方式
-    GLuint textureCoordsSlot = glGetAttribLocation(program, "TextureCoords");
     
-    // 将纹理 ID 传给着色器程序
-    glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, textureID);
-    glUniform1i(textureSlot, 0);  // 将 textureSlot 赋值为 0，而 0 与 GL_TEXTURE0 对应，这里如果写 1，上面也要改成 GL_TEXTURE1
-    
-    // 创建顶点缓存
+    // ------ 纹理渲染 ------ //
+    // 1. 生成缓存标识符
     GLuint vertexBuffer;
     glGenBuffers(1, &vertexBuffer);
+    // 2. 绑定一个缓存
     glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
+    // 3. 从CPU的内存复制数据到缓存
     GLsizeiptr bufferSizeBytes = sizeof(SenceVertex) * 4;
-    glBufferData(GL_ARRAY_BUFFER, bufferSizeBytes, self.vertices, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, bufferSizeBytes, vertices, GL_STATIC_DRAW);
     
-    // 设置顶点数据
-    glEnableVertexAttribArray(positionSlot);
-    glVertexAttribPointer(positionSlot, 3, GL_FLOAT, GL_FALSE, sizeof(SenceVertex), NULL + offsetof(SenceVertex, positionCoord));
+    // 获取 着色器 中的参数，然后将顶点和纹理数据传进去
+    /*
+     设置顶点坐标数据
+     4. 缓存的数据 glEnableVertexAttribArray
+     5. 设置指针 glVertexAttribPointer
+     */
+    GLuint positionSlot = glGetAttribLocation(program, "Position");// 获取着色器中属性Position的位置
+    glEnableVertexAttribArray(positionSlot);// 启用positionSlot指定的通用顶点属性数组
+    glVertexAttribPointer(positionSlot, 3, GL_FLOAT, GL_FALSE, sizeof(SenceVertex), NULL + offsetof(SenceVertex, positionCoord));//定义通用顶点属性数据的数组
     
-    // 设置纹理数据
+    // 设置纹理坐标数据
+    GLuint textureCoordsSlot = glGetAttribLocation(program, "TextureCoords");
     glEnableVertexAttribArray(textureCoordsSlot);
     glVertexAttribPointer(textureCoordsSlot, 2, GL_FLOAT, GL_FALSE, sizeof(SenceVertex), NULL + offsetof(SenceVertex, textureCoord));
     
-    // 开始绘制
+    // 将纹理 ID 传给着色器程序
+    GLuint textureSlot = glGetUniformLocation(program, "Texture");// 获取片段着色器中Uniform变量的位置
+    glActiveTexture(GL_TEXTURE0);//激活纹理单位GL_TEXTURE0
+    glBindTexture(GL_TEXTURE_2D, textureID);//将命名纹理绑定到纹理目标
+    glUniform1i(textureSlot, 0);  //指定统一变量的值 将 textureSlot 赋值为 0，而 0 与 GL_TEXTURE0 对应，这里如果写 1，上面也要改成 GL_TEXTURE1
+    
+    // 6. 开始绘制
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
     
     // 将绑定的渲染缓存呈现到屏幕上
     [self.context presentRenderbuffer:GL_RENDERBUFFER];
     
-    // 删除顶点缓存
+    // 7. 删除顶点缓存
     glDeleteBuffers(1, &vertexBuffer);
     vertexBuffer = 0;
 }
@@ -121,6 +138,7 @@ typedef struct {
                               renderBuffer);
 }
 
+// UIImage -> 纹理
 - (GLuint)createTextureWithImage:(UIImage *)image {
     // 将 UIImage 转换为 CGImageRef
     CGImageRef cgImageRef = [image CGImage];
@@ -239,15 +257,6 @@ typedef struct {
     return shader;
 }
 
-- (void)dealloc {
-    if ([EAGLContext currentContext] == self.context) {
-        [EAGLContext setCurrentContext:nil];
-    }
-    // C语言风格的数组，需要手动释放
-    if (_vertices) {
-        free(_vertices);
-        _vertices = nil;
-    }
-}
+
 
 @end
