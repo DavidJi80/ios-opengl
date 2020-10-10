@@ -19,7 +19,6 @@
     GLuint _glProgram;
 }
 
-@property (nonatomic , strong) EAGLContext* mContext;
 
 @end
 
@@ -38,6 +37,8 @@
     
     [self setupRenderAndFrameBuffer];
     
+    [self compileShaders];
+    
     // 设置清屏颜色
     glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
     // 用来指定要用清屏颜色来清除由mask指定的buffer，此处是color buffer
@@ -45,7 +46,7 @@
 
     glViewport(0, 0, self.view.frame.size.width, self.view.frame.size.height);
     
-    [self compileShaders];
+    
     
     [self render];
     
@@ -94,10 +95,11 @@
     }
 }
 
-// 初始化Render Frame Buffer
+/*
+ 配置RenderBuffer和FrameBuffer
+ 先renderbuffer，然后framebuffer，顺序不能互换。
+ */
 - (void)setupRenderAndFrameBuffer {
-    //先要renderbuffer，然后framebuffer，顺序不能互换。
-    
     // OpenGlES共有三种：colorBuffer，depthBuffer，stencilBuffer。
     // 生成一个renderBuffer，id是_colorRenderBuffer
     glGenRenderbuffers(1, &_colorRenderBuffer);
@@ -153,7 +155,6 @@
     glGetAttribLocation(programHandle, "Position");
 }
 
-
 - (GLuint)compileShader:(NSString *)shaderName withType:(GLenum)shaderType {
     //1. NSBundle中加载文件
     NSString *shaderPath = [[NSBundle mainBundle] pathForResource:shaderName ofType:@"glsl"];
@@ -191,11 +192,6 @@
 }
 
 - (void)render {
-    
-    [self renderUsingIndexVBO];
-}
-
-- (void)renderUsingIndexVBO {
     int numAttributs;
     glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &numAttributs);
     NSLog(@"----numAttributs:%d",numAttributs);
